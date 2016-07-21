@@ -1,0 +1,30 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <style name="resize_image">
+        <item name="android:padding">@dimen/resize_image_padding</item>
+        <item name="android:scaleType">fitXY</item>
+        <!--<item name="android:adjustViewBounds">true</item>-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/border_resize_imageview</item>
+        <!--<item name="android:layout_centerInParent">true</item>-->
+        <!--<item name="android:layout_alignParentLeft">true</item>-->
+        <!--<item name="android:layout_alignParentRight">true</item>-->
+        <!--<item name="android:layout_alignParentTop">true</item>-->
+        <!--<item name="android:layout_alignParentBottom">true</item>-->
+    </style>
+
+    <style name="resize_point">
+        <item name="android:src">@drawable/clip_point</item>
+        <item name="android:layout_height">@dimen/resize_button</item>
+        <item name="android:layout_width">@dimen/resize_button</item>
+    </style>
+
+
+</resources>
