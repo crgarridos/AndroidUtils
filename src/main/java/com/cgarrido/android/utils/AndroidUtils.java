@@ -21,7 +21,7 @@ public class AndroidUtils {
         return mContext;
     }
 
-    private static boolean checkForInternetConnection() {
+    public static boolean checkForInternetConnection() {
         NetworkInfo activeNetworkInfo = null;
         try {
             ConnectivityManager connectivityManager = (ConnectivityManager) getCtx().getSystemService(Context.CONNECTIVITY_SERVICE);
