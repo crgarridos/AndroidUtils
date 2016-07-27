@@ -31,5 +31,5 @@ dependencies {
 
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
-    compile 'https://github.com/vekexasia/android-edittext-validator'
+    compile 'com.andreabaccega:android-form-edittext:1.2.1@aar'
 }

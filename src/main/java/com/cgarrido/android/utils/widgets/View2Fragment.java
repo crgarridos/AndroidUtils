@@ -1,4 +1,4 @@
-package com.cgarrido.android.utils;
+package com.cgarrido.android.utils.widgets;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

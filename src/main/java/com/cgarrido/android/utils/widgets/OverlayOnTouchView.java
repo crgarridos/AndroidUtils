@@ -1,8 +1,11 @@
-package com.cgarrido.android.utils;
+package com.cgarrido.android.utils.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+
+import com.cgarrido.android.utils.R;
+import com.cgarrido.android.utils.ResUtils;
 
 public class OverlayOnTouchView extends FrameLayout {
     public OverlayOnTouchView(Context context) {
