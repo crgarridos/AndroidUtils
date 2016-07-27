@@ -1,4 +1,4 @@
-package com.ylly.android.utils;
+package com.cgarrido.android.utils;
 
 /**
  * Created by cristian on 17/11/2015

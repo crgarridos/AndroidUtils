@@ -1,4 +1,4 @@
-package com.ylly.android.utils;
+package com.cgarrido.android.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

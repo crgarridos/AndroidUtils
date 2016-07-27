@@ -1,4 +1,4 @@
-package com.ylly.android.utils.image;
+package com.cgarrido.android.utils.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.ylly.android.utils.R;
-import com.ylly.android.utils.MetricsUtils;
-import com.ylly.android.utils.ResUtils;
+import com.cgarrido.android.utils.R;
+import com.cgarrido.android.utils.MetricsUtils;
+import com.cgarrido.android.utils.ResUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

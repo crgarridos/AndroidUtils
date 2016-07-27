@@ -1,4 +1,4 @@
-package com.ylly.android.utils.widgets;
+package com.cgarrido.android.utils.widgets;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

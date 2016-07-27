@@ -1,4 +1,4 @@
-package com.ylly.android.utils.widgets;
+package com.cgarrido.android.utils.widgets;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,11 +1,9 @@
-package com.ylly.android.utils;
+package com.cgarrido.android.utils;
 
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
-
-import com.ylly.android.utils.YllyUtils;
 
 import java.io.File;
 
@@ -16,7 +14,7 @@ public abstract class FileUtils extends de.greenrobot.common.io.FileUtils{
     public static File getPathFromUri(Uri uri) {
         String[] filePathColumn = {MediaStore.Images.Media.DATA};
         // Get the cursor
-        Cursor cursor = YllyUtils.getCtx().getContentResolver().query(uri,
+        Cursor cursor = AndroidUtils.getCtx().getContentResolver().query(uri,
                 filePathColumn, null, null, null);
         // Move to first row
         if (cursor == null)

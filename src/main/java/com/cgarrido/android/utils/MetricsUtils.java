@@ -1,4 +1,4 @@
-package com.ylly.android.utils;
+package com.cgarrido.android.utils;
 
 import android.content.Context;
 import android.content.res.Resources;

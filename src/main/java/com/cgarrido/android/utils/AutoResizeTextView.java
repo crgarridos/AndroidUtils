@@ -1,4 +1,4 @@
-package com.ylly.android.utils;
+package com.cgarrido.android.utils;
 
 import android.annotation.TargetApi;
 import android.content.Context;

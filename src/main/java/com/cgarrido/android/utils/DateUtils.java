@@ -1,4 +1,4 @@
-package com.ylly.android.utils;
+package com.cgarrido.android.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

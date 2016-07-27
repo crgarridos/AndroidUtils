@@ -1,4 +1,4 @@
-package com.ylly.android.utils.exceptions;
+package com.cgarrido.android.utils.exceptions;
 
 /**
  * Created by cristian on 02/12/2015.

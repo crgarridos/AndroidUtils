@@ -1,4 +1,4 @@
-package com.ylly.android.utils.image;
+package com.cgarrido.android.utils.image;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.ylly.android.utils.R;
+import com.cgarrido.android.utils.R;
 
 /**
  * Created by cristian on 01/06/16.

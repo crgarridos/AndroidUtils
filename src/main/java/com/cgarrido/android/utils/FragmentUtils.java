@@ -1,4 +1,4 @@
-package com.ylly.android.utils;
+package com.cgarrido.android.utils;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,6 +8,14 @@ import android.support.v4.app.FragmentTransaction;
 
 public abstract class FragmentUtils {
 
+
+
+    public enum AnimType {
+        SLIDE_UP,
+        SLIDE_LEFT,
+        FADE_IN,
+        NONE
+    }
     public static boolean sDisableFragmentAnimations = false;
 
 
@@ -47,10 +55,10 @@ public abstract class FragmentUtils {
     public static void slideTransaction(FragmentManager fm, Fragment newFragment, int idContainer) {
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(
-                com.ylly.android.utils.R.anim.enter,
-                com.ylly.android.utils.R.anim.exit,
-                com.ylly.android.utils.R.anim.pop_enter,
-                com.ylly.android.utils.R.anim.pop_exit);
+                com.cgarrido.android.utils.R.anim.enter,
+                com.cgarrido.android.utils.R.anim.exit,
+                com.cgarrido.android.utils.R.anim.pop_enter,
+                com.cgarrido.android.utils.R.anim.pop_exit);
         ft.replace(idContainer, newFragment);
         ft.addToBackStack(null);
         ft.commit();
@@ -59,10 +67,10 @@ public abstract class FragmentUtils {
     public static void slideRightTransaction(FragmentManager fm, Fragment newFragment, int idContainer) {
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(
-                com.ylly.android.utils.R.anim.enter,
-                com.ylly.android.utils.R.anim.exit,
+                R.anim.enter,
+                R.anim.exit,
                 R.anim.nothing,
-                com.ylly.android.utils.R.anim.nothing);
+                R.anim.nothing);
         ft.replace(idContainer, newFragment);
         ft.addToBackStack(null);
         ft.commit();
@@ -104,12 +112,12 @@ public abstract class FragmentUtils {
     public static void slideUpTransaction(FragmentManager fm, Fragment newFragment, int idContainer) {
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(
-                com.ylly.android.utils.R.anim.slide_up_enter,
-                com.ylly.android.utils.R.anim.slide_up_exit,
-                com.ylly.android.utils.R.anim.pop_slide_up_enter,
-                com.ylly.android.utils.R.anim.pop_slide_up_exit);
-        ft.replace(idContainer, newFragment);
+                R.anim.slide_up_enter,
+                R.anim.slide_up_exit,
+                R.anim.pop_slide_up_enter,
+                R.anim.pop_slide_up_exit);
         ft.addToBackStack(null);
+        ft.replace(idContainer, newFragment);
         ft.commit();
     }
 
@@ -125,11 +133,10 @@ public abstract class FragmentUtils {
         ft.commit();
     }
 
-//    public static void addToStack(FragmentActivity origin, Fragment newFragment, int idContainer) {
-//        FragmentTransaction ft = origin.getSupportFragmentManager().beginTransaction();
-//        ft.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, R.anim.pop_enter, R.anim.pop_exit);
-//        ft.add(idContainer, newFragment);
-//        ft.addToBackStack(null);
-//        ft.commit();
-//    }
+    public static void addToStack(FragmentActivity origin, Fragment newFragment, int idContainer) {
+        FragmentTransaction ft = origin.getSupportFragmentManager().beginTransaction();
+        ft.replace(idContainer, newFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
 }

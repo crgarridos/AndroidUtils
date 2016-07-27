@@ -1,6 +1,5 @@
-package com.ylly.android.utils;
+package com.cgarrido.android.utils;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
@@ -20,7 +19,7 @@ public class ResUtils {
 
     @ColorInt
     public static int color(@ColorRes int resId) {
-        return ContextCompat.getColor(YllyUtils.getCtx(), resId);
+        return ContextCompat.getColor(AndroidUtils.getCtx(), resId);
     }
 
     /**
@@ -33,12 +32,12 @@ public class ResUtils {
      */
     @NonNull
     public static String str(@StringRes int resId) {
-        return YllyUtils.getCtx().getResources().getString(resId);
+        return AndroidUtils.getCtx().getResources().getString(resId);
     }
 
     public static Drawable drw(@DrawableRes int resId){
-        assert YllyUtils.getCtx() != null;
-        return ContextCompat.getDrawable(YllyUtils.getCtx(), resId);
+        assert AndroidUtils.getCtx() != null;
+        return ContextCompat.getDrawable(AndroidUtils.getCtx(), resId);
     }
 
 

@@ -1,4 +1,4 @@
-package com.ylly.android.utils.widgets.adapter;
+package com.cgarrido.android.utils.widgets.adapter;
 
 import android.support.v4.view.ViewPager;
 

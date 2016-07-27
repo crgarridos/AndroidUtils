@@ -1,4 +1,4 @@
-package com.ylly.android.utils.image;
+package com.cgarrido.android.utils.image;
 
 import android.content.Context;
 import android.content.res.AssetManager;
