@@ -11,9 +11,9 @@ This class should be initializated in the start of the application passing the c
 
 - Check internet connexion
 - string to md5
-- show android keyboard 
-- hide android keyboard 
+- show/hide android keyboard 
 
 Library for add many snippets for Android Projects
 
 
+# MultiSpinner & PopoupSpinner classes

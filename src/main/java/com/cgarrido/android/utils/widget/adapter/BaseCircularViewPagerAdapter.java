@@ -1,4 +1,4 @@
-package com.cgarrido.android.utils.widgets.adapter;
+package com.cgarrido.android.utils.widget.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
