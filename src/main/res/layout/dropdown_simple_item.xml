@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@android:id/text1"
+          style="?android:attr/spinnerItemStyle"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:ellipsize="marquee"
+          android:padding="@dimen/input_vertical_margin"
+          android:paddingLeft="@dimen/big_margin"
+          android:paddingStart="@dimen/big_margin"
+          android:paddingRight="@dimen/big_margin"
+          android:paddingEnd="@dimen/big_margin"
+          android:singleLine="true"
+          android:text="This is a text"
+          android:textAlignment="inherit"/>

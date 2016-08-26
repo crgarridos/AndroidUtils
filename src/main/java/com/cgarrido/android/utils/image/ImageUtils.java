@@ -1,14 +1,22 @@
 package com.cgarrido.android.utils.image;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
+import com.cgarrido.android.utils.MetricsUtils;
+import com.cgarrido.android.utils.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.ByteArrayOutputStream;
@@ -37,6 +45,7 @@ public abstract class ImageUtils {
         BitmapFactory.decodeFile(fullpath, options);
         return options;
     }
+
 
     public static Bitmap overlay(Bitmap bmp1, Bitmap bmp2) {
         int maxW = bmp1.getWidth() > bmp2.getWidth() ? bmp1.getWidth() : bmp2.getWidth();

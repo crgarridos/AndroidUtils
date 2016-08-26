@@ -1,5 +1,6 @@
 package com.cgarrido.android.utils;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
@@ -8,6 +9,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.view.View;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -16,6 +18,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by cristian on 12/01/2016
  */
 public class ResUtils {
+
+    @ColorInt
+    public static int randomColor(){
+        return Color.argb(255, (int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
+    }
 
     @ColorInt
     public static int color(@ColorRes int resId) {
@@ -37,6 +44,7 @@ public class ResUtils {
 
     public static Drawable drw(@DrawableRes int resId){
         assert AndroidUtils.getCtx() != null;
+
         return ContextCompat.getDrawable(AndroidUtils.getCtx(), resId);
     }
 

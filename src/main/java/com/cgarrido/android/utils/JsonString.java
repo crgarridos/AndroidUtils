@@ -11,6 +11,8 @@ import java.util.HashMap;
  * Created by cristian on 26/11/2015.
  */
 public class JsonString{
+
+
     public String toString() {
         return (new GsonBuilder().setPrettyPrinting().create().toJson(this));
     }
@@ -35,6 +37,11 @@ public class JsonString{
 
     public JsonElement toJson() {
         return  new Gson().toJsonTree(this);
+    }
+
+
+    public static JsonElement toJson(String json) {
+        return new JsonParser().parse(json);
     }
 
     public HashMap<String, String> toHash() {

@@ -10,4 +10,12 @@
     <declare-styleable name="TintableImageView">
         <attr name="tint" format="reference|color" />
     </declare-styleable>
+
+
+    <declare-styleable name="AspectFrameLayout">
+        <attr name="aspectRatio" format="fraction" />
+    </declare-styleable>
+
+    <bool name="portraitDevice">true</bool>
 </resources>
+

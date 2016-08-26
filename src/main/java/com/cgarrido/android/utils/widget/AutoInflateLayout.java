@@ -1,4 +1,4 @@
-package com.cgarrido.android.utils;
+package com.cgarrido.android.utils.widget;
 
 /**
  * Created by cristian on 08/09/2015.

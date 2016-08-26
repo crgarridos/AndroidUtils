@@ -9,4 +9,16 @@
     <dimen name="resize_image_padding">8dp</dimen> <!-- la taille des button pour redimensioner / 2-->
     <dimen name="resize_image_padding_negative">-8dp</dimen> <!-- la taille des button pour redimensioner / 2-->
     <dimen name="resize_image_padding_border">7dp</dimen> <!-- la taille des button pour redimensioner / 2 - 1 -->
+
+    <dimen name="input_vertical_margin">14dp</dimen>
+
+    <dimen name="vast_margin">24dp</dimen>
+    <dimen name="ample_margin">20dp</dimen>
+    <dimen name="natural_margin">16dp</dimen>
+    <dimen name="soft_margin">12dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="small_margin_negative">-8dp</dimen>
+    <dimen name="tiny_margin">4dp</dimen>
+    <dimen name="tiny_margin_negative">-4dp</dimen>
+    <dimen name="big_margin">32dp</dimen>
 </resources>

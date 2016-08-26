@@ -1,4 +1,4 @@
-package com.cgarrido.android.utils;
+package com.cgarrido.android.utils.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;

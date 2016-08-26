@@ -9,6 +9,14 @@ import android.support.v4.app.FragmentTransaction;
 public abstract class FragmentUtils {
 
 
+    public static void remove(Fragment fragment) {
+        FragmentManager manager = fragment.getActivity().getSupportFragmentManager();
+        FragmentTransaction trans = manager.beginTransaction();
+        trans.remove(fragment);
+        trans.commitNow();
+//        trans.commit();
+//        manager.popBackStack();
+    }
 
     public enum AnimType {
         SLIDE_UP,
@@ -44,15 +52,15 @@ public abstract class FragmentUtils {
         if (!animations) FragmentUtils.sDisableFragmentAnimations = true;
         FragmentManager fm = ctx.getSupportFragmentManager();
         for (int i = 0; i < steps; i++)
-            fm.popBackStackImmediate();
+            fm.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         if (!animations) FragmentUtils.sDisableFragmentAnimations = false;
     }
 
-    public static void slideTransaction(Fragment origin, Fragment newFragment, int idContainer) {
-        slideTransaction(origin.getFragmentManager(),newFragment,idContainer);
+    public static void slide(Fragment origin, Fragment newFragment, int idContainer) {
+        slide(origin.getFragmentManager(),newFragment,idContainer);
     }
 
-    public static void slideTransaction(FragmentManager fm, Fragment newFragment, int idContainer) {
+    public static void slide(FragmentManager fm, Fragment newFragment, int idContainer) {
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(
                 com.cgarrido.android.utils.R.anim.enter,
@@ -105,11 +113,11 @@ public abstract class FragmentUtils {
         fadeIn(fm,newFragment,idContainer, true);
     }
 
-    public static void slideUpTransaction(Fragment origin, Fragment newFragment, int idContainer) {
-        slideUpTransaction(origin.getFragmentManager(), newFragment, idContainer);
+    public static void slideUp(Fragment origin, Fragment newFragment, int idContainer) {
+        slideUp(origin.getFragmentManager(), newFragment, idContainer);
     }
 
-    public static void slideUpTransaction(FragmentManager fm, Fragment newFragment, int idContainer) {
+    public static void slideUp(FragmentManager fm, Fragment newFragment, int idContainer) {
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(
                 R.anim.slide_up_enter,
@@ -117,25 +125,30 @@ public abstract class FragmentUtils {
                 R.anim.pop_slide_up_enter,
                 R.anim.pop_slide_up_exit);
         ft.addToBackStack(null);
-        ft.replace(idContainer, newFragment);
+        ft.add(idContainer, newFragment);
         ft.commit();
     }
 
-    public static void replace(FragmentActivity origin, Fragment newFragment, int idContainer) {
+    public static void set(FragmentActivity origin, Fragment newFragment, int idContainer) {
         FragmentTransaction ft = origin.getSupportFragmentManager().beginTransaction();
         ft.replace(idContainer, newFragment);
         ft.commit();
     }
 
-    public static void replace(FragmentManager supportFragmentManager, Fragment newFragment, int idContainer) {
+    public static void set(FragmentManager supportFragmentManager, Fragment newFragment, int idContainer) {
         FragmentTransaction ft = supportFragmentManager.beginTransaction();
         ft.replace(idContainer, newFragment);
         ft.commit();
     }
 
     public static void addToStack(FragmentActivity origin, Fragment newFragment, int idContainer) {
-        FragmentTransaction ft = origin.getSupportFragmentManager().beginTransaction();
-        ft.replace(idContainer, newFragment);
+        addToStack(origin.getSupportFragmentManager(), newFragment, idContainer);
+    }
+
+
+    public static void addToStack(FragmentManager supportFragmentManager, Fragment newFragment, int idContainer) {
+        FragmentTransaction ft = supportFragmentManager.beginTransaction();
+        ft.add(idContainer, newFragment);
         ft.addToBackStack(null);
         ft.commit();
     }
