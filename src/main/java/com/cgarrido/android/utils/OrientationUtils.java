@@ -16,7 +16,7 @@ public class OrientationUtils {
 
     private OrientationUtils() {}
 
-    public static void setScreenOrientationAutomatically(Activity activity) {
+    public static void forceScreenOrientationAutomatically(Activity activity) {
         boolean forcePortrait = activity.getResources().getBoolean(R.bool.portraitDevice);
         Log.d("portraitDevice", ": " + forcePortrait);
         int orientation = forcePortrait

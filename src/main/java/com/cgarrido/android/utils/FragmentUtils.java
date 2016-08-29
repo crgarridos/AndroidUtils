@@ -98,8 +98,8 @@ public abstract class FragmentUtils {
     public static void fadeIn(FragmentManager fm, Fragment newFragment, int idContainer, boolean addToBackStack) {
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(
-                android.R.anim.fade_in,
-                android.R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.fade_out,
                 R.anim.nothing,
                 R.anim.nothing);
         ft.replace(idContainer, newFragment);

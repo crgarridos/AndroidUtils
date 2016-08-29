@@ -29,7 +29,7 @@ import com.cgarrido.android.utils.R;
  * Layout that adjusts to maintain a specific aspect ratio.
  */
 public class AspectFrameLayout extends FrameLayout {
-    private static final String TAG = "AFL";
+    private static final String TAG = AspectFrameLayout.class.getSimpleName();
     public static boolean ENABLE_LOGS = false;
 
     private double mTargetAspect = -1.0;        // initially use default window size
