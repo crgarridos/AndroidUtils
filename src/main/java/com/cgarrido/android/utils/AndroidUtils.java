@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -36,7 +37,22 @@ public class AndroidUtils {
         } catch (Exception e) {
             Log.d(TAG, "checkForInternetConnection Exception", e);
         }
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected() && activeNetworkInfo.isAvailable();
+        boolean result = activeNetworkInfo != null && activeNetworkInfo.isConnected() && activeNetworkInfo.isAvailable();
+        return result;
+    }
+
+    private static boolean isInternetAvalaible() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int     exitValue = ipProcess.waitFor();
+            return exitValue == 0;
+
+        }
+        catch (Exception e) { e.printStackTrace(); }
+
+        return false;
     }
 
     public static String md5(String s) {

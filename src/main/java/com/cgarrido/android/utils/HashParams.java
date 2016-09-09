@@ -11,4 +11,14 @@ public class HashParams extends HashMap<String,Object>{
         super.put(key, value);
         return this;
     }
+
+    public static HashParams singleton(String key, Object value){
+        HashParams hash = new HashParams();
+        hash.add(key, value);
+        return hash;
+    }
+
+    public String toJsonString(){
+        return JsonString.valueOf(this);
+    }
 }
