@@ -26,15 +26,28 @@ public abstract class FileUtils extends de.greenrobot.common.io.FileUtils{
         return new File(imgDecodableString);
     }
 
-    public static String getMimeType(String fileUrl) {
-        String extension = MimeTypeMap.getFileExtensionFromUrl(fileUrl);
+    public static String getMimeType(File file) {
+        return getMimeType(file.getName());
+    }
+
+    public static String getMimeType(String fileName) {
+        String extension = getExtension(fileName);
+        if (extension == null)
+            return null;
         return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
 
     public static String getExtension(File file) {
-        int lastDotIndex = file.getName().lastIndexOf(".");
-        return lastDotIndex > 0 ? file.getName().substring(lastDotIndex + 1).toLowerCase() : "";
+        return getExtension(file.getName());
     }
+
+    public static String getExtension(String fileName) {
+        int extensionDelimiter = fileName.lastIndexOf(".");
+        if (extensionDelimiter == -1)
+            return null;
+        return fileName.substring(extensionDelimiter + 1, fileName.length());
+    }
+
 
     public static boolean isImageExtension(File file) {
         switch (getExtension(file)){

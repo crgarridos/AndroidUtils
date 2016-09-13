@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.IntDef;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+import android.widget.Toast.*;
 
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -74,8 +78,16 @@ public class AndroidUtils {
         return "";
     }
 
+    @IntDef({Toast.LENGTH_LONG, Toast.LENGTH_SHORT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ToastDuration {}
+
     public static void toast(String msg) {
-            Toast.makeText(getCtx(), msg, Toast.LENGTH_SHORT).show();
+        toast(msg, Toast.LENGTH_SHORT);
+    }
+
+    public static void toast(String msg, @ToastDuration int duration) {
+        Toast.makeText(getCtx(), msg, duration).show();
     }
 
     /**
@@ -96,5 +108,6 @@ public class AndroidUtils {
         view.requestFocus();
         inputMethodManager.showSoftInput(view, 0);
     }
+
 }
 

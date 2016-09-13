@@ -33,6 +33,10 @@ public abstract class IntentUtils {
         return i;
     }
 
+    public static void openBrowser(Activity activity, String url) {
+        activity.startActivity(openBrowser(url));
+    }
+
     public static void openWithGDocs(Activity activity, Uri uri) {
         Intent target = new Intent(Intent.ACTION_VIEW);
         target.setDataAndType(uri, "application/pdf");
@@ -56,8 +60,6 @@ public abstract class IntentUtils {
 
 
     public static boolean openWithPDFReader(Activity activity, File file) {
-
-
         Uri path = Uri.fromFile(file);
         Intent target = new Intent(Intent.ACTION_VIEW);
         target.setDataAndType(path, "application/pdf");
@@ -80,7 +82,34 @@ public abstract class IntentUtils {
             }
         }
         return true;
+    }
 
+
+    public static boolean openWithAppropriateApp(Activity activity, File file) {
+        Uri path = Uri.fromFile(file);
+        Intent target = new Intent(Intent.ACTION_VIEW);
+        String mimeType = FileUtils.getMimeType(file);
+        target.setDataAndType(path, mimeType);
+        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//        target.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        try {
+            activity.startActivity(target);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(activity, "No Application Available",
+                    Toast.LENGTH_LONG).show();
+            String ext = FileUtils.getExtension(file);
+            // Instruct the user to install a PDF reader here, or something
+//            https://play.google.com/store/apps/details?id=com.google.android.apps.pdfviewer
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW)
+                    .setData(Uri.parse("market://search?q="+ext+"&c=apps"));
+            try {
+                activity.startActivity(goToMarket);
+            } catch (ActivityNotFoundException ignored) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static Intent openGPSSettings() {
