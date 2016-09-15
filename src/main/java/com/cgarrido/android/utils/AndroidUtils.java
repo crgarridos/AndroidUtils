@@ -101,12 +101,22 @@ public class AndroidUtils {
     }
 
     /**
+     * @param view the view to shift the focus, should be setted as focusable and focusableInTouchMode
+     *
+     * Hides the soft keyboard
+     */
+    public static void hideSoftKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getCtx().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    /**
      * Shows the soft keyboard
      */
     public static void showSoftKeyboard(View view) {
         InputMethodManager inputMethodManager = (InputMethodManager) getCtx().getSystemService(Context.INPUT_METHOD_SERVICE);
         view.requestFocus();
-        inputMethodManager.showSoftInput(view, 0);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
 }

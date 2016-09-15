@@ -23,6 +23,7 @@ public class PopupSelector extends TextView {
     private OnItemSelectedListener mListener;
     private String mDefaultText;
     private Object mSelected;
+    private String mTitle;
 
     public PopupSelector(Context context) {
         super(context);
@@ -53,6 +54,8 @@ public class PopupSelector extends TextView {
         @Override
         public void onClick(View v) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            if (mTitle != null && !mTitle.isEmpty())
+                builder.setTitle(mTitle);
             builder.setSingleChoiceItems(mAdapter, -1, mChoiseListener);
             builder.show();
         }
@@ -130,6 +133,10 @@ public class PopupSelector extends TextView {
 
     public void setListener(OnItemSelectedListener mListener) {
         this.mListener = mListener;
+    }
+
+    public void setTitle(String title) {
+        mTitle = title;
     }
 
     public interface OnItemSelectedListener{
