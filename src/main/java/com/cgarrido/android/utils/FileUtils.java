@@ -2,6 +2,9 @@ package com.cgarrido.android.utils;
 
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.os.StatFs;
 import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 
@@ -11,6 +14,15 @@ import java.io.File;
  * Created by cristian on 01/09/2015.
  */
 public abstract class FileUtils extends de.greenrobot.common.io.FileUtils{
+
+    @SuppressWarnings({"NewApi", "deprecation"})
+    public static long getExternalAvailableSpace(){
+        StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
+        return Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2
+                ? stat.getAvailableBlocksLong() * stat.getBlockSizeLong()
+                : stat.getAvailableBlocks() * stat.getBlockSize();
+    }
+
     public static File getPathFromUri(Uri uri) {
         String[] filePathColumn = {MediaStore.Images.Media.DATA};
         // Get the cursor
