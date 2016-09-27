@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">ResizableView</string>
-    <string name="hello_world">ResizableView</string>
+    <string name="dialogs.close">Close dialog</string>
 </resources>
