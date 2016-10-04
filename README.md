@@ -16,4 +16,4 @@ This class should be initializated in the start of the application passing the c
 Library for add many snippets for Android Projects
 
 
-# MultiSpinner & PopoupSpinner classes
+# MultiSpinner & PopoupSpinner classes ...
