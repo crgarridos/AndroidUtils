@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 24
@@ -15,6 +16,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 }
 
@@ -34,7 +38,11 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.andreabaccega:android-form-edittext:1.2.1@aar'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     //HTML TextView
 //    compile 'org.sufficientlysecure:html-textview:1.8'
+}
+repositories {
+    mavenCentral()
 }
