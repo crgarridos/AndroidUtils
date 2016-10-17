@@ -16,25 +16,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dexOptions {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:support-v13:24.2.0'
     compile 'com.android.support:support-annotations:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
-
     compile 'com.google.android.gms:play-services-location:9.2.1'
-
     compile 'com.google.code.gson:gson:2.4'
     compile 'de.greenrobot:java-common:2.0.0'
-
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'com.andreabaccega:android-form-edittext:1.2.1@aar'
-
     //HTML TextView
-//    compile 'org.sufficientlysecure:html-textview:1.8'
+    //    compile 'org.sufficientlysecure:html-textview:1.8'
 }
