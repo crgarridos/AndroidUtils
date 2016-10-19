@@ -5,11 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.ColorUtils;
 import android.view.View;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -48,6 +48,12 @@ public class ResUtils {
         return ContextCompat.getDrawable(AndroidUtils.getCtx(), resId);
     }
 
+    /**
+     * @return the dimension in pixels
+     * */
+    public static int dim(@DimenRes int resId) {
+        return AndroidUtils.getCtx().getResources().getDimensionPixelSize(resId);
+    }
 
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
     /**
@@ -71,4 +77,5 @@ public class ResUtils {
             return View.generateViewId();
         }
     }
+
 }
