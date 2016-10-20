@@ -1,4 +1,4 @@
-package com.cgarrido.android.utils.widget;
+package com.cgarrido.android.utils.widget.html;
 
 import android.content.Context;
 import android.text.Html;
@@ -26,12 +26,11 @@ public class HtmlTextView extends TextView{
 
     @Override
     public void setText(CharSequence text, BufferType type) {
-        StringBuilder stringBuilder = new StringBuilder(text.length());
-        stringBuilder.append(text);
+        String s = String.valueOf(text).replace("&lt;", "<");
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            super.setText(Html.fromHtml(stringBuilder.toString(),Html.FROM_HTML_MODE_LEGACY), type);
+            super.setText(Html.fromHtml(s,Html.FROM_HTML_MODE_LEGACY, null, new UlTagHandler()), type);
         } else {
-            super.setText(Html.fromHtml(stringBuilder.toString()), type);
+            super.setText(Html.fromHtml(s, null, new UlTagHandler()), type);
         }
     }
 }

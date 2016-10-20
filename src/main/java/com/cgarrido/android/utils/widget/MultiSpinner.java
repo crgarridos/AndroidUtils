@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import com.cgarrido.android.utils.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MultiSpinner extends TextView implements OnMultiChoiceClickListener {
 
     private SpinnerAdapter mAdapter;
@@ -70,7 +74,7 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
                     dialog.dismiss();
                 }
             });
-
+            builder.setCancelable(true);
             builder.show();
         }
     };
@@ -139,6 +143,27 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
         this.mListener = listener;
     }
 
+    public void setSelectedItems(List<?> items) {
+        boolean[] selected = new boolean[mAdapter.getCount()];
+        Arrays.fill(selected, false);
+        for(int i = 0 ; i < mAdapter.getCount(); i++) {
+            for (Object item : items) {
+                if(mAdapter.getItem(i).equals(item))
+                    selected[i] = true;
+            }
+        }
+        setSelected(selected);
+    }
+
+    public List<?> getSelectedItems() {
+        List<Object> result = new ArrayList<>();
+        for(int i=0, s=0; i < mSelected.length; i++)
+            if(mSelected[i])
+                result.add(mAdapter.getItem(i));
+        return result;
+    }
+
+
     public interface MultiSpinnerListener {
         public void onItemsSelected(boolean[] selected);
     }
@@ -157,6 +182,7 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
         return this.mSelected;
     }
 
+    @Deprecated
     public int[] getSelectedIndices() {
         int[] idx = new int[getSelectedCount()];
         for(int i=0, s=0; i < mSelected.length; i++)
@@ -165,6 +191,7 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
         return idx;
     }
 
+    @Deprecated
     public void setSelected(boolean[] selected) {
         if (this.mSelected.length != selected.length)
             return;

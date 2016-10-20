@@ -57,6 +57,7 @@ public class PopupSelector extends TextView {
             if (mTitle != null && !mTitle.isEmpty())
                 builder.setTitle(mTitle);
             builder.setSingleChoiceItems(mAdapter, -1, mChoiseListener);
+            builder.setCancelable(true);
             builder.show();
         }
     };
