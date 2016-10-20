@@ -3,6 +3,7 @@ package com.cgarrido.android.utils.image;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
  */
 public class ResponsiveImageView extends ImageView {
 
+    private static final String TAG = ResponsiveImageView.class.getSimpleName();
     //overlay is black with transparency of 0x77 (119)
     private int mColorOverlay = 0x33000000;
 
@@ -29,46 +31,51 @@ public class ResponsiveImageView extends ImageView {
     }
 
     private void initView() {
+        clearOverlay();
         this.setOnTouchListener(new OnTouchListener() {
-
-            public boolean mCancelClick = false;
-
-            @Override
             public boolean onTouch(View v, MotionEvent e) {
-                ImageView view = (ImageView) v;
+                getParent().requestDisallowInterceptTouchEvent(true);
                 switch (e.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        mCancelClick = false;// reset state for future events
-                        view.getDrawable().setColorFilter(mColorOverlay, PorterDuff.Mode.SRC_ATOP);
-                        view.invalidate();
+                    case MotionEvent.ACTION_DOWN:
+                        applyOverlay();
                         return true;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        if(mCancelClick)
-                            return false;
-                        view.performClick();
-                        //continue in down case...
-                    }
-                    case MotionEvent.ACTION_CANCEL: {
-                        //clear the overlay
-                        view.getDrawable().clearColorFilter();
-                        view.invalidate();
+                    case MotionEvent.ACTION_UP:
+                        clearOverlay();
+                        performClick();
                         return false;
-                    }
-                    case MotionEvent.ACTION_MOVE:{
-                        mCancelClick = e.getX() < 0 || e.getY() < 0
-                                    || e.getX() > getMeasuredWidth() || e.getY() > getMeasuredHeight();
-                        if(mCancelClick){
-                            view.getDrawable().clearColorFilter();
-                            view.invalidate();
+                        //continue in down case...
+                    case MotionEvent.ACTION_CANCEL:
+                        //clearOverlay the overlay
+                        clearOverlay();
+                        return false;
+                    case MotionEvent.ACTION_MOVE:
+                        if (isOutside(e)) {
+                            clearOverlay();
+                            return false;
                         }
-                        return mCancelClick;
-                    }
+                        return true;
                 }
                 return false;
-
             }
+
         });
+    }
+
+    private void applyOverlay() {
+        getDrawable().setColorFilter(mColorOverlay, PorterDuff.Mode.SRC_ATOP);
+        Log.d(TAG,  "applyOverlay : " + this);
+//        invalidate();
+    }
+
+    private boolean isOutside(MotionEvent e) {
+        return  e.getX() < 0 || e.getY() < 0
+                || e.getX() > getMeasuredWidth() || e.getY() > getMeasuredHeight();
+    }
+
+    private void clearOverlay() {
+        getDrawable().clearColorFilter();
+        Log.d(TAG,  "clearOverlay : " + this);
+//        invalidate();
     }
 
     public void setColorOverlay(int colorOverlay) {
