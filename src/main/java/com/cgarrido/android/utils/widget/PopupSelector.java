@@ -4,14 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.DataSetObserver;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cgarrido.android.utils.R;
@@ -44,7 +39,7 @@ public class PopupSelector extends TextView {
         public void onClick(DialogInterface dialog, int which) {
             setSelected(which);
             if(mListener != null)
-                mListener.onItemSelected(getSelected(), which);
+                mListener.onItemSelected(getSelectedItem(), which);
             dialog.dismiss();
         }
 
@@ -94,7 +89,16 @@ public class PopupSelector extends TextView {
         setText(mSelected != null ? mSelected.toString() : getDefaultText());
     }
 
-    public Object getSelected() {
+
+    public int getSelected() {
+        for (int i = 0; i < mAdapter.getCount(); i++) {
+            if(mSelected == mAdapter.getItem(i))
+                return i;
+        }
+        return -1;
+    }
+
+    public Object getSelectedItem() {
         return this.mSelected;
     }
 

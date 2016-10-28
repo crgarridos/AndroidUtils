@@ -191,13 +191,10 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
         return idx;
     }
 
-    @Deprecated
     public void setSelected(boolean[] selected) {
         if (this.mSelected.length != selected.length)
             return;
-
         this.mSelected = selected;
-
         refreshSpinner();
     }
 
