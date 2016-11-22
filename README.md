@@ -5,7 +5,7 @@
 
 # AndroidUtils class
 
-This class should be initializated in the start of the application passing the context in AndroidUtils.initContext(context);
+This class should be initializated in the start of the application passing the activity in AndroidUtils.initContext(activity);
 
 ## Avalaible functions :
 

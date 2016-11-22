@@ -1,31 +1,25 @@
 package com.cgarrido.android.utils.image;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
-import com.cgarrido.android.utils.MetricsUtils;
-import com.cgarrido.android.utils.R;
+import com.cgarrido.android.utils.AndroidUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * Created by cristian on 15/09/2015.
- *
  */
 public abstract class ImageUtils {
     public static final String FILE_PREFIX = "file://";
@@ -39,7 +33,7 @@ public abstract class ImageUtils {
         return mImageLoader;
     }
 
-    public static BitmapFactory.Options getBitmapOptions(String fullpath){
+    public static BitmapFactory.Options getBitmapOptions(String fullpath) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(fullpath, options);
@@ -57,7 +51,7 @@ public abstract class ImageUtils {
         return bmOverlay;
     }
 
-    public static Bitmap scaledOverlay(Bitmap below, Bitmap above){
+    public static Bitmap scaledOverlay(Bitmap below, Bitmap above) {
         int maxW = below.getWidth() > above.getWidth() ? below.getWidth() : above.getWidth();
         int maxH = below.getHeight() > above.getHeight() ? below.getHeight() : above.getHeight();
 
@@ -71,7 +65,7 @@ public abstract class ImageUtils {
     }
 
 
-    public  static Bitmap getBitmapFromAsset(Context ctx, String strName) throws IOException {
+    public static Bitmap getBitmapFromAsset(Context ctx, String strName) throws IOException {
         AssetManager assetManager = ctx.getAssets();
         InputStream istr = assetManager.open(strName);
         Bitmap bitmap = BitmapFactory.decodeStream(istr);
@@ -80,8 +74,7 @@ public abstract class ImageUtils {
     }
 
 
-    public static Bitmap getBitmapFromPath(String fullPath) throws IOException
-    {
+    public static Bitmap getBitmapFromPath(String fullPath) throws IOException {
         if (!fullPath.contains("://"))
             throw new IOException("The file path should contain the uri prefix");
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -91,8 +84,7 @@ public abstract class ImageUtils {
         return bitmap;
     }
 
-    public static Bitmap getBitmapFromPathNoCache(String fullPath) throws IOException
-    {
+    public static Bitmap getBitmapFromPathNoCache(String fullPath) throws IOException {
         if (fullPath.contains("://"))
             throw new IOException("The file path should NOT contain the uri prefix");
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -120,9 +112,9 @@ public abstract class ImageUtils {
     }
 
     public static Bitmap flipX(Bitmap bitmap) {
-        Bitmap mutableBitmap = Bitmap.createBitmap(bitmap.getWidth(),bitmap.getHeight(),bitmap.getConfig());//bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap mutableBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());//bitmap.copy(Bitmap.Config.ARGB_8888, true);
         Matrix flipHorizontalMatrix = new Matrix();
-        flipHorizontalMatrix.setScale(-1,1);
+        flipHorizontalMatrix.setScale(-1, 1);
         flipHorizontalMatrix.postTranslate(bitmap.getWidth(), 0);
 
         Canvas canvas = new Canvas(mutableBitmap);
@@ -135,7 +127,33 @@ public abstract class ImageUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         String s = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-        Log.d("encodeBase64",s);
+        Log.d("encodeBase64", s);
         return s;
+    }
+
+    public static File createFile(Bitmap bitmap, String filename, boolean deleteIfExists) {
+        //create a file to write bitmap data
+        File f = new File(AndroidUtils.getCtx().getCacheDir(), filename);
+        if (deleteIfExists && f.exists())
+            f.delete();
+        try {
+            if (f.createNewFile()) {
+                //Convert bitmap to byte array
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+                byte[] bitmapdata = bos.toByteArray();
+
+                //write the bytes in file
+                FileOutputStream fos = new FileOutputStream(f);
+                fos.write(bitmapdata);
+                fos.flush();
+                fos.close();
+                return f;
+            }
+        } catch (IOException ignored) {
+        }
+        return null;
+
+
     }
 }

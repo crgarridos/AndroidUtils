@@ -5,13 +5,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.IntDef;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-import android.widget.Toast.*;
 
-import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.MessageDigest;
@@ -78,10 +77,6 @@ public class AndroidUtils {
         return "";
     }
 
-    @IntDef({Toast.LENGTH_LONG, Toast.LENGTH_SHORT})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ToastDuration {}
-
     public static void toast(String msg) {
         toast(msg, Toast.LENGTH_SHORT);
     }
@@ -119,5 +114,20 @@ public class AndroidUtils {
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
+    public static String getDeviceId() {
+        final TelephonyManager tm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        if (android.provider.Settings.Secure.getString(mContext.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID) != null)
+            return android.provider.Settings.Secure.getString(mContext.getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+        else if (tm.getDeviceId() != null)
+            return tm.getDeviceId();
+        else
+            return tm.getSimSerialNumber();
+    }
+
+
+    @IntDef({Toast.LENGTH_LONG, Toast.LENGTH_SHORT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ToastDuration {
+    }
 }
 
