@@ -26,20 +26,13 @@ import android.widget.FrameLayout;
  */
 public class VideoEnabledWebChromeClient extends WebChromeClient implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener
 {
-    public interface ToggledFullscreenCallback
-    {
-        public void toggledFullscreen(boolean fullscreen);
-    }
-
     private View activityNonVideoView;
     private ViewGroup activityVideoView;
     private View loadingView;
     private VideoEnabledWebView webView;
-
     private boolean isVideoFullscreen; // Indicates if the video is being displayed using a custom view (typically full-screen)
     private FrameLayout videoViewContainer;
     private CustomViewCallback videoViewCallback;
-
     private ToggledFullscreenCallback toggledFullscreenCallback;
 
     /**
@@ -276,6 +269,10 @@ public class VideoEnabledWebChromeClient extends WebChromeClient implements Medi
         {
             return false;
         }
+    }
+
+    public interface ToggledFullscreenCallback {
+        void toggledFullscreen(boolean fullscreen);
     }
 
 }

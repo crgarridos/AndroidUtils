@@ -24,26 +24,21 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
     private String mDefaultText;
     private String mAllText;
     private boolean mAllSelected;
+    DataSetObserver dataSetObserver = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            // all selected by default
+            mOldSelection = new boolean[mAdapter.getCount()];
+            mSelected = new boolean[mAdapter.getCount()];
+            for (int i = 0; i < mSelected.length; i++) {
+                mOldSelection[i] = false;
+                mSelected[i] = mAllSelected;
+            }
+        }
+    };
     private MultiSpinnerListener mListener;
     private boolean mPrependCheckMark = false;
     private String mSeparator = ", ";
-
-    public MultiSpinner(Context context) {
-        super(context);
-    }
-
-    public MultiSpinner(Context context, AttributeSet attr) {
-        this(context, attr, R.attr.spinnerStyle);
-    }
-
-    public MultiSpinner(Context context, AttributeSet attr, int defStyle) {
-        super(context, attr, defStyle);
-    }
-
-    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-        mSelected[which] = isChecked;
-    }
-
     private OnClickListener onClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -79,23 +74,25 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
         }
     };
 
+    public MultiSpinner(Context context) {
+        super(context);
+    }
+
+    public MultiSpinner(Context context, AttributeSet attr) {
+        this(context, attr, R.attr.spinnerStyle);
+    }
+
+    public MultiSpinner(Context context, AttributeSet attr, int defStyle) {
+        super(context, attr, defStyle);
+    }
+
+    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+        mSelected[which] = isChecked;
+    }
+
     public SpinnerAdapter getAdapter() {
         return this.mAdapter;
     }
-
-    DataSetObserver dataSetObserver = new DataSetObserver() {
-        @Override
-        public void onChanged() {
-            // all selected by default
-            mOldSelection = new boolean[mAdapter.getCount()];
-            mSelected = new boolean[mAdapter.getCount()];
-            for (int i = 0; i < mSelected.length; i++) {
-                mOldSelection[i] = false;
-                mSelected[i] = mAllSelected;
-            }
-        }
-    };
-
 
     public void setAdapter(SpinnerAdapter adapter){
         setAdapter(adapter, false, null);
@@ -143,6 +140,14 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
         this.mListener = listener;
     }
 
+    public List<?> getSelectedItems() {
+        List<Object> result = new ArrayList<>();
+        for (int i = 0, s = 0; i < mSelected.length; i++)
+            if (mSelected[i])
+                result.add(mAdapter.getItem(i));
+        return result;
+    }
+
     public void setSelectedItems(List<?> items) {
         boolean[] selected = new boolean[mAdapter.getCount()];
         Arrays.fill(selected, false);
@@ -154,20 +159,6 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
         }
         setSelected(selected);
     }
-
-    public List<?> getSelectedItems() {
-        List<Object> result = new ArrayList<>();
-        for(int i=0, s=0; i < mSelected.length; i++)
-            if(mSelected[i])
-                result.add(mAdapter.getItem(i));
-        return result;
-    }
-
-
-    public interface MultiSpinnerListener {
-        public void onItemsSelected(boolean[] selected);
-    }
-
 
     public int getSelectedCount() {
         int count = 0;
@@ -182,6 +173,13 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
         return this.mSelected;
     }
 
+    public void setSelected(boolean[] selected) {
+        if (this.mSelected.length != selected.length)
+            return;
+        this.mSelected = selected;
+        refreshSpinner();
+    }
+
     @Deprecated
     public int[] getSelectedIndices() {
         int[] idx = new int[getSelectedCount()];
@@ -189,13 +187,6 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
             if(mSelected[i])
                 idx[s++] = i;
         return idx;
-    }
-
-    public void setSelected(boolean[] selected) {
-        if (this.mSelected.length != selected.length)
-            return;
-        this.mSelected = selected;
-        refreshSpinner();
     }
 
     private void refreshSpinner() {
@@ -260,5 +251,9 @@ public class MultiSpinner extends TextView implements OnMultiChoiceClickListener
     public void setSeparator(String separator) {
         mSeparator = separator;
         refreshSpinner();
+    }
+
+    public interface MultiSpinnerListener {
+        void onItemsSelected(boolean[] selected);
     }
 }

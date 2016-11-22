@@ -36,17 +36,6 @@ public class AutoResizeTextView extends TextView {
     private boolean _initiallized = false;
     private TextPaint paint;
 
-    private interface SizeTester {
-        /**
-         * @param suggestedSize  Size of text to be tested
-         * @param availableSpace available space in which text must fit
-         * @return an integer < 0 if after applying {@code suggestedSize} to
-         * text, it takes less space than {@code availableSpace}, > 0
-         * otherwise
-         */
-        public int onTestSize(int suggestedSize, RectF availableSpace);
-    }
-
     public AutoResizeTextView(final Context context) {
         this(context, null, 0);
     }
@@ -116,15 +105,15 @@ public class AutoResizeTextView extends TextView {
     }
 
     @Override
+    public int getMaxLines() {
+        return _maxLines;
+    }
+
+    @Override
     public void setMaxLines(final int maxlines) {
         super.setMaxLines(maxlines);
         _maxLines = maxlines;
         reAdjust();
-    }
-
-    @Override
-    public int getMaxLines() {
-        return _maxLines;
     }
 
     @Override
@@ -269,5 +258,16 @@ public class AutoResizeTextView extends TextView {
         super.onSizeChanged(width, height, oldwidth, oldheight);
         if (width != oldwidth || height != oldheight)
             reAdjust();
+    }
+
+    private interface SizeTester {
+        /**
+         * @param suggestedSize  Size of text to be tested
+         * @param availableSpace available space in which text must fit
+         * @return an integer < 0 if after applying {@code suggestedSize} to
+         * text, it takes less space than {@code availableSpace}, > 0
+         * otherwise
+         */
+        int onTestSize(int suggestedSize, RectF availableSpace);
     }
 }
