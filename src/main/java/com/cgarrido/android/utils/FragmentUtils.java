@@ -95,6 +95,15 @@ public abstract class FragmentUtils {
         ft.commit();
     }
 
+    public static void crossSlideLeft(FragmentManager fm, Fragment newFragment, int idContainer) {
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.setCustomAnimations(
+                android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        ft.replace(idContainer, newFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
     public static void fadeIn(FragmentManager fm, Fragment newFragment, int idContainer, boolean addToBackStack) {
         FragmentTransaction ft = fm.beginTransaction();
         ft.setCustomAnimations(

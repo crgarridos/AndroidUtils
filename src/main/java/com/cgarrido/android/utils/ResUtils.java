@@ -44,7 +44,6 @@ public class ResUtils {
 
     public static Drawable drw(@DrawableRes int resId){
         assert AndroidUtils.getCtx() != null;
-
         return ContextCompat.getDrawable(AndroidUtils.getCtx(), resId);
     }
 
